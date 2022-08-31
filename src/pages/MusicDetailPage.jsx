@@ -52,7 +52,7 @@ dispatch(getMusic());
                 <p>id:</p>
                 <h2 className="card-title">{music.user}</h2>
                 <p className="card-text">{music.title}</p>
-                <p className="card-text">{music.artist}</p>
+                <p className="cagird-text">{music.artist}</p>
                 <p className="card-text">{music.body}</p></div>
             ))}
           </Text>
