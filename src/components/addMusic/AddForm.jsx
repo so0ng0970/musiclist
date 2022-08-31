@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import musicSlice from "../../redux/modules/musicSlice"
 import axios from "axios";
+
 let nextId =0;
 function AddForm() {
 
@@ -16,7 +17,7 @@ function AddForm() {
         title:"", //노래제목
         artist:"", //아티스트(가수)
         body:"", 
-        id: nextId++,//추천내용
+       //추천내용
     });
  
    const [music,setMusic]= useState(null);

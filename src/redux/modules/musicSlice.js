@@ -42,17 +42,31 @@ export const postMusic = createAsyncThunk(
     }
   }
 );
+
+export const DeleteMusic = createAsyncThunk( 
+  "music/deletemusic", 
+async (id) => {
+   axios.delete(`http://localhost:3001/music/${id}`);
+   alert('삭제되었습니다!')
+
+});
+
 const musicSlice = createSlice({
   name: "music",
   initialState,
   reducers: {},
   extraReducers: {
- 
+    [getMusic.pending]: (state) => {
+      state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
+    },
     [getMusic.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.music = action.payload;
     },
-   
+    [getMusic.rejected]: (state, action) => {
+      state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
+      state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
+    },
     [postMusic.pending]: (state, action) => {
       state.isLoading = true;
     },
@@ -64,6 +78,8 @@ const musicSlice = createSlice({
       state.isLoading = false;
       state.error = action.paylod;
     },
+    [DeleteMusic.fulfilled]: (state, { payload }) =>
+    state.filter((data) => data.id !== payload)
   },
 });
 

@@ -16,11 +16,11 @@ const navigate = useNavigate();
 
   return (
     <StCard>
-       <button type="button" class="btn btn-light"
+       <button type="button" className="btn btn-light"
                  onClick={() => {
           navigate("/detail/"+id);} }
               >ᴅᴇᴛᴀɪʟ</button>
-              <div key={music.id}>
+              <div>
            
                 <p>id:{music.id}</p>
                 <h2 className="card-title">작성자:{user}</h2>
