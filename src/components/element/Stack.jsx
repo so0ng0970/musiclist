@@ -9,6 +9,7 @@ const Stack = ({ children, align, jusify, direction }) => {
   );
 };
 
+export default Stack;
 
 const StContainer = styled.div`
   width: 100%;
@@ -19,5 +20,3 @@ const StContainer = styled.div`
       direction,
     })}
 `;
-
-export default Stack;

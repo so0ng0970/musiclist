@@ -1,12 +1,12 @@
-import React, { useReducer, useState,useEffect} from "react";
+import React, {useEffect} from "react";
 // import 'bootstrap/dist/css/bootstrap.css';
 import styled from "styled-components";
 import {useSelector} from "react-redux"
-import {Route, Router} from "react-router-dom";
-import { useHistory } from "react-router-dom";
+
+
 import { useDispatch } from "react-redux";
 import {getMusic}from "../redux/modules/musicSlice";
-import axios from "axios";
+
 import {useParams} from "react-router-dom"
 import Comment from "../components/comments/Comment";
 const MusicDetailPage= () => {
@@ -16,11 +16,13 @@ useEffect(()=>{
 dispatch(getMusic());
 },[dispatch])
 
-
+const Params= useParams();
 
   const {music} = useSelector((state) => state.music);
- console.log(music)
  
+ const music_index = Params.id-1;
+ console.log(music[ music_index])
+
 
 // const onDelete = (e,id) => {
 //   e.preventDefault();
@@ -46,15 +48,16 @@ dispatch(getMusic());
           <button type="button" className="btn btn-light"
           >X</button>
           <Text>
-            {music.map((music) => (
-              <div key={music.id}>
+            {
+              <div >
 
-                <p>id:</p>
-                <h2 className="card-title">{music.user}</h2>
-                <p className="card-text">{music.title}</p>
-                <p className="cagird-text">{music.artist}</p>
-                <p className="card-text">{music.body}</p></div>
-            ))}
+                <p>id:{music[ music_index].id}</p>
+                <h2 className="card-title">{music[ music_index].user}</h2>
+                <p className="card-text">{music[ music_index].title}</p>
+                <p className="cagird-text">{music[ music_index].artist}</p>
+                <p className="card-text">{music[ music_index].body}</p>
+                </div>
+            }
           </Text>
         </Card>
       </Card> 

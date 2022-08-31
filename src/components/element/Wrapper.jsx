@@ -9,6 +9,5 @@ export default Wrapper;
 
 const StContainer = styled.div`
   width: 100%;
-  padding: ${({ pd }) => pd};
-  margin: ${({ mg }) => mg};
+  
 `;

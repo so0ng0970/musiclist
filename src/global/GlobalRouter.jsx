@@ -13,7 +13,7 @@ function GlobalRouter() {
             <Route path="/" element={<Homepage />}></Route>
             <Route path="/add" element={<MusicAddFormpage />}></Route>
             <Route path="/musiclist" element={<MusicListPage/>}></Route>
-            <Route path="/detail/" element ={<MusicDetailPage/>}></Route>
+            <Route path="/detail/:id" component={MusicDetailPage} element ={<MusicDetailPage/>}></Route>
             </Routes>
         </>
     )

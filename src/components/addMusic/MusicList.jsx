@@ -1,21 +1,27 @@
 import React, { useEffect } from "react";
-import {useNavigate} from "react-router-dom";
 import Stack from "../element/Stack";
-import Text from "../element/Text";
-import Button from "../element/Button";
-
+import Card from "../element/Card"; 
+import {useSelector} from "react-redux"
+import { getMusic } from "../../redux/modules/musicSlice";
+import { useDispatch } from "react-redux";
 
 const MusicList = () => {
- 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {music} = useSelector((state) => state.music);
+
+  useEffect(() => {
+    dispatch(getMusic());
+  }, [dispatch]);
 
     return (
-   
+     
       <Stack>
-        <Text size="18">목록이 비었습니다.</Text> <Button  
-         onClick={() => {
-          navigate("/detail/");} }/>
-        </Stack>
+      {music.map((music) => (
+                <Card
+                music={music}
+              key={music.id}
+                />  ))}
+      </Stack>
     );
 };
 
