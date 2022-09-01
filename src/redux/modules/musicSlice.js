@@ -13,7 +13,7 @@ export const getMusic = createAsyncThunk(
   "music/getmusic",
   async (payload, thunkAPI) => {
     try {
-      const data= await axios.get("https://music010101.vercel.app/music");
+      const data= await axios.get("http://localhost:3001/music");
         console.log(data.data)
       return thunkAPI.fulfillWithValue(data.data);
   
@@ -46,7 +46,7 @@ export const postMusic = createAsyncThunk(
 export const DeleteMusic = createAsyncThunk( 
   "music/deletemusic", 
 async (id) => {
-   axios.delete(`https://music010101.vercel.app/music/${id}`);
+   axios.delete(`http://localhost:3001/music/${id}`);
    alert('삭제되었습니다!')
 
 });
@@ -54,7 +54,7 @@ async (id) => {
 export const UpdateMusic = createAsyncThunk(
   "music/updateMusic",
   async ({ id,title,body,user,artist}) => {
-    axios.put(`https://music010101.vercel.app/music/${id}`, {
+    axios.put(`http://localhost:3001/music/${id}`, {
      title:title,body:body,user:user,artist:artist
     });alert('수정되었습니다!')
     return { id, title,body,user,artist};

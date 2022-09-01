@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../global/Layout";
 import NaviHome from "../components/home/NaviHome";
-import MusicList from "../components/addMusic/MusicList";
+import MusicList from "../components/addMusic/MusicList"
 import MusicDetailPage from "./MusicDetailPage";
 
 
