@@ -6,6 +6,7 @@ import Comment from "../components/comments/Comment";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {DeleteMusic} from "../redux/modules/musicSlice"
+import { Link } from "react-router-dom"; 
 
 function MusicDetailpage(){
     const dispatch = useDispatch();
@@ -21,10 +22,16 @@ function MusicDetailpage(){
 
     return(
         <>
+
+        
          <Card className="card">
            <Card className="card-body">
+            <Link
+             to={`/edit/${data.id}`}
+             state={data}
+            >
              <button type="button" className="btn btn-light"
-             >ᴇᴅɪᴛ</button>
+             >ᴇᴅɪᴛ</button></Link>
              <button type="button" className="btn btn-light" 
              onClick={deleteBtn}
              >X</button>

@@ -4,7 +4,7 @@ import Homepage from "../pages/HomePage";
 import MusicAddFormpage from "../pages/MusicAddFormPage";
 import MusicListPage from "../pages/MusicListPage";
 import MusicDetailPage from "../pages/MusicDetailPage";
-
+import MusicEditPage from "../pages/MusicEditPage";
 
 function GlobalRouter() {
     return (
@@ -14,6 +14,8 @@ function GlobalRouter() {
             <Route path="/add" element={<MusicAddFormpage />}></Route>
             <Route path="/musiclist" element={<MusicListPage/>}></Route>
             <Route path="/detail/:id" component={MusicDetailPage} element ={<MusicDetailPage/>}></Route>
+            <Route path="/edit/:id" element ={<MusicEditPage/>}></Route>
+
             </Routes>
         </>
     )

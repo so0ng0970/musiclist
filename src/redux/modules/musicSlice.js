@@ -51,6 +51,17 @@ async (id) => {
 
 });
 
+export const UpdateMusic = createAsyncThunk(
+  "music/updateMusic",
+  async ({ id,title,body}) => {
+    axios.put(`http://localhost:3001/music/${id}`, {
+     title:title,body:body
+    });alert('수정되었습니다!')
+    return { id, title,body};
+    
+  }
+);
+
 const musicSlice = createSlice({
   name: "music",
   initialState,
@@ -81,6 +92,15 @@ const musicSlice = createSlice({
     [DeleteMusic.fulfilled]: (state, { payload }) =>
     state.filter((data) => data.id !== payload)
   },
-});
+    [ UpdateMusic.fulfilled]: (state, { payload }) => {
+      return state.map((data) => {
+        if (data.id === payload.id) {
+          return { ...data,title: payload.title,body:payload.body };
+        } else {
+          return data;
+        }
+      });
+    },
+  });
 
 export default musicSlice.reducer;
