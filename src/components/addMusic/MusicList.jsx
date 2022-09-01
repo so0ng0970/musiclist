@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Stack from "../element/Stack";
 import Card from "../element/Card"; 
@@ -19,7 +20,7 @@ const MusicList = () => {
       {music.map((music) => (
                 <Card
                 music={music}
-              key={music.id}
+                key={music.id}
                 />  ))}
       </Stack>
     );

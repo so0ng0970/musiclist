@@ -1,26 +1,38 @@
+
+
 import React from "react";
 import styled from "styled-components";
-//import { useNavigate } from "react-router-dom";
-//import { useDispatch } from "react-redux";
-import "bootstrap/dist/css/bootstrap.css";
-import {useNavigate} from "react-router-dom";
 
+//import { useDispatch } from "react-redux";
+import MusicDetailpage from "../../pages/MusicDetailPage"
+import "bootstrap/dist/css/bootstrap.css";
+import { Link } from "react-router-dom";
 
 
 const Card = ({music}) => {
 
-  
-const {user,title,artist,body,id} = music
-const navigate = useNavigate();
+    
+  const {user,title,artist,body,id} = music
 
+  const data = {
+    'id':id,
+    'user': user,
+    'title': title,
+    'artist': artist,
+    'body': body
+  }
 
   return (
+    
     <StCard>
+      <Link 
+        to={`/detail/${music.id}`}
+                state={data}
+      >
        <button type="button" className="btn btn-light"
-                 onClick={() => {
-          navigate("/detail/"+id);} }
-              >ᴅᴇᴛᴀɪʟ</button>
-              <div>
+        >ᴅᴇᴛᴀɪʟ</button>
+        </Link>
+              <div key={music.id}>
            
                 <p>id:{music.id}</p>
                 <h2 className="card-title">작성자:{user}</h2>
