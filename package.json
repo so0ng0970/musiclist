@@ -1,5 +1,8 @@
 {
-  "proxy": "http://localhost:3001/music",
+
+
+  
+  "proxy": "https://music010101.vercel.app/",
   "name": "musicrecmd",
   "version": "0.1.0",
   "private": true,
