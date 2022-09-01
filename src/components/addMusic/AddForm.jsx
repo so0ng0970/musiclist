@@ -23,7 +23,7 @@ function AddForm() {
    const [music,setMusic]= useState(null);
 
     const FetchMusic = async () => {
-      const { data } = await axios.get("http://localhost:3001/music",music);
+      const { data } = await axios.get("https://music010101.vercel.app/music",music);
       setMusic(data);}
 
     
@@ -33,7 +33,7 @@ function AddForm() {
     // };
 
     const onSubmitHandler = (music) => {
-      axios.post("http://localhost:3001/music", music);
+      axios.post("https://music010101.vercel.app/music", music);
     };
    
   useEffect(() => {FetchMusic();}, []);

@@ -18,24 +18,24 @@ const Comment = ({ sendId }) => {
   const [comments, setComments] = useState(null);
 
   const fetchComments = async () => {
-    const { data } = await axios.get("http://localhost:3001/comment");
+    const { data } = await axios.get("https://music010101.vercel.app/comment");
     setComments(data);
   };
 
   const onSubmitHandler = (comment) => {
-    axios.post("http://localhost:3001/comment", comment);
+    axios.post("https://music010101.vercel.app/comment", comment);
     fetchComments();
   };
 
   const onClickDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/comment/${id}`)
+      .delete(`https://music010101.vercel.app/comment/${id}`)
       .then(() => fetchComments())
       .catch((error) => console.log(error));
   };
 
   const makeInput = async (comment, id) => {
-    await axios.put(`http://localhost:3001/comment/${id}`, {
+    await axios.put(`https://music010101.vercel.app/comment/${id}`, {
       ...comment,
       input: 1,
     });
@@ -44,7 +44,7 @@ const Comment = ({ sendId }) => {
 
   const onClickUpdate = (id, updated) => {
     axios
-      .put(`http://localhost:3001/comment/${id}`, updated)
+      .put(`https://music010101.vercel.app/comment/${id}`, updated)
       .then(() => fetchComments())
       .catch((error) => console.log(error));
   };
