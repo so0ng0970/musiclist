@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"; // axios import 합니다.
 import styled from "styled-components";
 
-const Comment = () => {
+const Comment = ({ sendId }) => {
+  const cardId = { sendId };
   const [comment, setComment] = useState({
     title: "",
     input: 0,
+    cardId: 0,
   });
   const [updatedTitle, setUpdatedTitle] = useState({
     title: "",
     input: 0,
+    cardId: 0,
   });
 
   const [comments, setComments] = useState(null);
@@ -21,27 +24,34 @@ const Comment = () => {
 
   const onSubmitHandler = (comment) => {
     axios.post("http://localhost:3001/comment", comment);
+    fetchComments();
   };
 
   const onClickDelete = (id) => {
     axios
       .delete(`http://localhost:3001/comment/${id}`)
-      .then(() => console.log("success"))
+      .then(() => fetchComments())
       .catch((error) => console.log(error));
   };
 
-  const makeInput = (comment, id) => {
-    axios.put(`http://localhost:3001/comment/${id}`, { ...comment, input: 1 });
+  const makeInput = async (comment, id) => {
+    await axios.put(`http://localhost:3001/comment/${id}`, {
+      ...comment,
+      input: 1,
+    });
+    fetchComments();
   };
 
   const onClickUpdate = (id, updated) => {
     axios
       .put(`http://localhost:3001/comment/${id}`, updated)
-      .then(() => console.log("success"))
+      .then(() => fetchComments())
       .catch((error) => console.log(error));
   };
+
   useEffect(() => {
     fetchComments();
+    console.log("유지펙트");
   }, []);
 
   return (
@@ -51,6 +61,7 @@ const Comment = () => {
           // 👇 submit했을 때 브라우저의 새로고침을 방지합니다.
           e.preventDefault();
           onSubmitHandler(comment);
+          console.log("여기", cardId.sendId);
         }}>
         <CommentInput
           type="text"
@@ -59,38 +70,41 @@ const Comment = () => {
             setComment({
               ...comment,
               title: value,
+              cardId: cardId.sendId,
             });
           }}
         />
         <AddButton>추가하기</AddButton>
       </Commentform>
       <div>
-        {comments?.map((comment) => (
-          <CommentList key={comment.id}>
-            <CommentA>{comment.title}</CommentA>
-            <button onClick={() => makeInput(comment, comment.id)}>
-              {" "}
-              수정{" "}
-            </button>
-            <button onClick={() => onClickDelete(comment.id)}> 삭제 </button>
-          </CommentList>
-        ))}
-        {comments?.map((comment) => {
-          if (comment.input === 1) {
-            return (
-              <div key={comment.id}>
-                <input
-                  onChange={(e) =>
-                    setUpdatedTitle({ ...comment, title: e.target.value })
-                  }></input>
-                <button onClick={() => onClickUpdate(comment.id, updatedTitle)}>
-                  {" "}
-                  수정완료
-                </button>
-              </div>
-            );
-          }
-        })}
+        {comments?.map((comment) =>
+          comment.cardId === sendId ? (
+            <CommentList key={comment.id}>
+              <CommentA>{comment.title}</CommentA>
+              <button onClick={() => makeInput(comment, comment.id)}>
+                수정
+              </button>
+              <button onClick={() => onClickDelete(comment.id)}>삭제</button>
+              {comment.input === 1 ? (
+                <div key={comment.id}>
+                  <input
+                    onChange={(e) =>
+                      setUpdatedTitle({
+                        ...comment,
+                        title: e.target.value,
+                        input: 0,
+                      })
+                    }></input>
+
+                  <button
+                    onClick={() => onClickUpdate(comment.id, updatedTitle)}>
+                    수정완료
+                  </button>
+                </div>
+              ) : null}
+            </CommentList>
+          ) : null
+        )}
       </div>
     </>
   );
@@ -105,7 +119,6 @@ const Commentform = styled.form`
 `;
 
 const CommentInput = styled.input`
-  margin-left: 30%;
   margin-bottom: 50px;
   margin-right: 10px;
 `;
